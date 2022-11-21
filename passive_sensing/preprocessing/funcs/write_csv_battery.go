@@ -24,7 +24,7 @@ func WriteCsvBattery(file_name string, id []string, payload []string, date []str
 	csvwriter := csv.NewWriter(csvFile)
 
 	i := 0
-	row := []string{"participant_id", "activity", "confidence", "date"}
+	row := []string{"participant_id", "battery_level", "battery_state", "confidence", "date"}
 	err = csvwriter.Write(row)
 	if err != nil {
 		log.Fatalf("Writing of the header into the csv went wrong: %s", err)
