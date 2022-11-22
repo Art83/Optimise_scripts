@@ -26,14 +26,13 @@ func WriteCsvLocation(file_name string, id []string, payload []string, date []st
 
 	csvwriter := csv.NewWriter(csvFile)
 
-	i := 0
 	row := []string{"participant_id", "latitude", "longitude", "altitude", "horizontal_accuracy", "vertical_accuracy", "date"}
 	err = csvwriter.Write(row)
 	if err != nil {
 		log.Fatalf("Writing of the header into the csv went wrong: %s", err)
 	}
 	fmt.Println("Writing location into the csv file")
-	for i < len(id) {
+	for i := 1; i < len(id); i++ {
 		jsonRes := json_obj_location{}
 		err = json.Unmarshal([]byte(payload[i]), &jsonRes)
 		if err != nil {
@@ -45,7 +44,6 @@ func WriteCsvLocation(file_name string, id []string, payload []string, date []st
 		if err != nil {
 			log.Fatalf("Writing into the csv went wrong: %s", err)
 		}
-		i++
 	}
 	csvwriter.Flush()
 	fmt.Println("Writing the locations data into the csv file is finished")
